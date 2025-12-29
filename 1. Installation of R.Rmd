@@ -1,0 +1,69 @@
+# Installing R in Vscode
+Follow the steps below to install R and set it up in Visual Studio Code (VSCode): https://code.visualstudio.com/docs/languages/r
+
+Follow the steps below to enable R markdown in VSCode: https://github.com/REditorSupport/vscode-R/wiki/R-Markdown
+
+
+# How to use R/R markdown
+
+
+**For R scripts:** you can create a new file with the extension `.R` and write your R code in it. 
+You can run the entire script or selected lines of code in RStudio by using the "Run" button or the keyboard shortcut 
+`Ctrl + Enter` (Windows/Linux) or `Cmd + Enter` (Mac).
+
+**For R markdown scripts:** you can create an R markdown document by creating a new file with the extension `.Rmd`.
+R markdown documents can contain text, code chunks, and the output of those code chunks (like plots or tables).
+
+A typical way to create a chunk of r code in r markdown file is to use three backticks followed by {r} to start the chunk, and three backticks to end the chunk. For example:
+
+```{r}
+m <- matrix(1:9, nrow = 3)
+```
+
+Some additional options can be specified in the curly braces. 
+
+- Basic control (code, execution, output):
+
+| Option       | Meaning                  | Common values              | Notes                 |
+| ------------ | ------------------------ | -------------------------- | --------------------- |
+| `echo`       | Show code in output      | TRUE / FALSE               | Hide code but run it  |
+| `eval`       | Evaluate code            | TRUE / FALSE               | Useful in tutorials   |
+| `include`    | Show results in document | TRUE / FALSE               | Run but do not print  |
+| `results`    | Output format            | "markup" / "asis" / "hold" | `hold` = print at end |
+| `collapse`   | Merge code & output      | TRUE / FALSE               | Nice for examples     |
+| `prompt`     | Show `>` prompt          | TRUE / FALSE               | Console-style output  |
+| `tidy`       | Auto-format code         | TRUE / FALSE               | Can change formatting |
+| `error`      | Continue on error        | TRUE / FALSE               | Teaching / demo use   |
+| `cache`      | Cache results            | TRUE / FALSE               | Heavy computation     |
+| `cache.lazy` | Lazy load cache          | TRUE / FALSE               | Better performance    |
+| `dependson`  | Chunk dependency         | chunk name                 | Cache workflow        |
+
+
+-  Message, warning and output behavior:
+
+| Option        | Meaning               | Default | Usage                 |
+| ------------- | --------------------- | ------- | --------------------- |
+| `message`     | Show messages         | TRUE    | Hide startup messages |
+| `warning`     | Show warnings         | TRUE    | Cleaner reports       |
+| `error`       | Keep errors in output | FALSE   | Still knit            |
+| `comment`     | Prefix for output     | `"##"`  | Set `""` to remove    |
+| `strip.white` | Strip blank lines     | FALSE   | Tighter layout        |
+
+
+- Figure options:
+
+| Option       | Meaning                | Example                           |
+| ------------ | ---------------------- | --------------------------------- |
+| `fig.width`  | Figure width (inches)  | `fig.width = 6`                   |
+| `fig.height` | Figure height (inches) | `fig.height = 4`                  |
+| `fig.align`  | Alignment              | `"left"` / `"center"` / `"right"` |
+| `fig.cap`    | Figure caption         | `"Result plot"`                   |
+| `fig.scap`   | Short caption          | `"Short title"`                   |
+| `fig.env`    | LaTeX environment      | `"figure"`                        |
+| `fig.ext`    | Output format          | `"png"` / `"pdf"` / `"svg"`       |
+| `fig.retina` | Retina scaling         | `2`                               |
+| `dpi`        | Resolution             | `96` / `300`                      |
+| `out.width`  | Output width           | `"80%"` / `"6cm"`                 |
+| `out.height` | Output height          | `"4cm"`                           |
+| `out.extra`  | Extra HTML / CSS attrs | `"style='border:1px'"`            |
+

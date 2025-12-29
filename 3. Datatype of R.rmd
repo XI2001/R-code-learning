@@ -1,0 +1,139 @@
+# Constant and Variable 
+Constant are variable, include numerical constant or String constant etc. 
+
+Numerical cosntant can be integer or decimal point number. R will automatically switch to proper data type.
+
+```{r constant_variable, results='hide'}
+123
+3.14
+-0.02
+1.23E2
+1.2E-2
+123L # the L suffix indicates an integer
+```
+
+
+
+Variable is used to store data, and can be created by assignment operator `<-` or `=`.
+
+Variable name can be composed of letters, numbers, dot (.) and underscore (_), but cannot start with number or underscore. Variable names are case-sensitive.
+
+```{r variable_example, results='hide'}
+a <- 10
+b = 3.14
+my_var <- "Hello, R!"
+
+tax.table <- data.frame(ID = 1:5, Name = c("A", "B", "C", "D", "E")) # not recommended to use. # nolint
+tax.name <- "Tax Data"
+```
+
+
+# Numerical vector and calculation
+use `c()` function to create a vector, which is a one-dimensional array that can hold multiple values of the same type.
+
+
+```{r vector_creation}
+
+marks <- c(85, 90, 78, 92, 88)
+x1 <- c(1:3, 10:13)
+x2 <- c(20:25)
+x <- c(x1, x2) # 这个是拼接，不是二维向量
+print(x)
+```
+
+If two vector have the same length, the calculation between them is element-wise:
+```{r vector_calculation}
+x1 <- c(1, 10)
+x2 <- c(4, 2)
+x1 + x2
+## [1]  5 12
+x1 - x2
+## [1] -3  8
+x1 * x2
+## [1]  4 20
+x1 / x2
+## [1] 0.25 5.00
+```
+
+If two vector have different length, the shorter one will be recycled to match the length of the longer one:
+```{r vector_recycling}
+a <- c(1, 2, 3, 4)
+b <- c(4, 5)
+a + b
+## [1] 5 7 7 9
+```
+
+When function is applied to a vector, it will be applied to each element of the vector:
+
+```{r vector_function}
+nums <- c(1, 4, 9, 16)
+sqrt_nums <- sqrt(nums)
+print(sqrt_nums) # prints c(1, 2, 3, 4
+```
+
+
+some common mathematical functions that can be applied to vectors, can run code `help.start()` in R console to open the help page and search for more functions.
+
+Commonly used mathematical functions:
+
+| Category                          | Functions                                                  |
+| --------------------------------- | ---------------------------------------------------------- |
+| Rounding                          | `ceiling`, `floor`, `round`, `signif`, `trunc`, `zapsmall` |
+| Sign function                     | `sign`                                                     |
+| Absolute value                    | `abs`                                                      |
+| Square root                       | `sqrt`                                                     |
+| Logarithm & exponential functions | `log`, `exp`, `log10`, `log2`                              |
+| Trigonometric functions           | `sin`, `cos`, `tan`                                        |
+| Inverse trigonometric functions   | `asin`, `acos`, `atan`, `atan2`                            |
+| Hyperbolic functions              | `sinh`, `cosh`, `tanh`                                     |
+| Inverse hyperbolic functions      | `asinh`, `acosh`, `atanh`                                  |
+
+Less commonly used mathematical functions:
+
+| Category                         | Functions                                                            |
+| -------------------------------- | -------------------------------------------------------------------- |
+| Beta functions                   | `beta`, `lbeta`                                                      |
+| Gamma functions                  | `gamma`, `lgamma`, `digamma`, `trigamma`, `tetragamma`, `pentagamma` |
+| Combinatorics                    | `choose`, `lchoose`                                                  |
+| Fourier transforms & convolution | `fft`, `mvfft`, `convolve`                                           |
+| Orthogonal polynomials           | `poly`                                                               |
+| Root finding                     | `polyroot`, `uniroot`                                                |
+| Optimization                     | `optimize`, `optim`                                                  |
+| Bessel functions                 | `besselI`, `besselK`, `besselJ`, `besselY`                           |
+| Spline interpolation             | `spline`, `splinefun`                                                |
+| Simple differentiation           | `deriv`                                                              |
+
+
+# Sort and order
+You can use `sort()` function to sort a vector in ascending or descending order. The `rev(x)` function can be used to reverse the order of a vector. `order(x)` function return the indices that would sort the vector.
+
+```{r sort_order_example}
+vec <- c(5, 2, 8, 1, 4)
+sorted_vec <- sort(vec) # ascending order
+cat("the vector sorted in ascending order:", sorted_vec, "\n")
+desc_sorted_vec <- sort(vec, decreasing = TRUE) # descending order
+cat("the vector sorted in descending order:", desc_sorted_vec, "\n")
+reversed_vec <- rev(vec) # reverse order
+cat("the vector in reverse order:", reversed_vec, "\n")
+order_indices <- order(vec) # indices that would sort the vector
+cat("the indices that would sort the vector:", order_indices, "\n")
+sort_by_indices <- vec[order_indices] # sort using the indices
+cat("the vector sorted using the order indices:", sort_by_indices, "\n")
+```
+
+# Statistical functions
+
+commonly used statistical functions that can be applied to vectors: like `mean()`, `median()`, `sd()`, `var()`, `min()`, `max()`, `quantile()`, `summary()` etc.
+
+```{r statistical_functions_example}
+var <- c(10, 20, 30, 40, 50, rnorm(3))
+print(var)
+print(mean(var))      # calculates the mean
+print(median(var))    # calculates the median
+print(sd(var))        # calculates the standard deviation
+print(var(var))       # calculates the variance
+print(min(var))       # finds the minimum value
+print(max(var))       # finds the maximum value
+print(quantile(var, probs = seq(0, 1, 0.25)))  # calculates the quantiles
+print(summary(var))   # provides a summary of statistics
+```
