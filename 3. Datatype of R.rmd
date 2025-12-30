@@ -20,7 +20,7 @@ Variable name can be composed of letters, numbers, dot (.) and underscore (_), b
 
 ```{r variable_example, results='hide'}
 a <- 10
-b = 3.14
+b <- 3.14
 my_var <- "Hello, R!"
 
 tax.table <- data.frame(ID = 1:5, Name = c("A", "B", "C", "D", "E")) # not recommended to use. # nolint
@@ -32,8 +32,7 @@ tax.name <- "Tax Data"
 use `c()` function to create a vector, which is a one-dimensional array that can hold multiple values of the same type.
 
 
-```{r vector_creation}
-
+```{r vector_creation, results='hide'}
 marks <- c(85, 90, 78, 92, 88)
 x1 <- c(1:3, 10:13)
 x2 <- c(20:25)
@@ -42,7 +41,7 @@ print(x)
 ```
 
 If two vector have the same length, the calculation between them is element-wise:
-```{r vector_calculation}
+```{r vector_calculation, results='hide'}
 x1 <- c(1, 10)
 x2 <- c(4, 2)
 x1 + x2
@@ -56,7 +55,7 @@ x1 / x2
 ```
 
 If two vector have different length, the shorter one will be recycled to match the length of the longer one:
-```{r vector_recycling}
+```{r vector_recycling, results='hide'}
 a <- c(1, 2, 3, 4)
 b <- c(4, 5)
 a + b
@@ -65,7 +64,7 @@ a + b
 
 When function is applied to a vector, it will be applied to each element of the vector:
 
-```{r vector_function}
+```{r vector_function, results='hide'}
 nums <- c(1, 4, 9, 16)
 sqrt_nums <- sqrt(nums)
 print(sqrt_nums) # prints c(1, 2, 3, 4
@@ -107,7 +106,7 @@ Less commonly used mathematical functions:
 # Sort and order
 You can use `sort()` function to sort a vector in ascending or descending order. The `rev(x)` function can be used to reverse the order of a vector. `order(x)` function return the indices that would sort the vector.
 
-```{r sort_order_example}
+```{r sort_order_example, results='hide'}
 vec <- c(5, 2, 8, 1, 4)
 sorted_vec <- sort(vec) # ascending order
 cat("the vector sorted in ascending order:", sorted_vec, "\n")
@@ -125,15 +124,1060 @@ cat("the vector sorted using the order indices:", sort_by_indices, "\n")
 
 commonly used statistical functions that can be applied to vectors: like `mean()`, `median()`, `sd()`, `var()`, `min()`, `max()`, `quantile()`, `summary()` etc.
 
-```{r statistical_functions_example}
+```{r statistical_functions_example, results='hide'}
 var <- c(10, 20, 30, 40, 50, rnorm(3))
 print(var)
-print(mean(var))      # calculates the mean
-print(median(var))    # calculates the median
-print(sd(var))        # calculates the standard deviation
-print(var(var))       # calculates the variance
-print(min(var))       # finds the minimum value
-print(max(var))       # finds the maximum value
-print(quantile(var, probs = seq(0, 1, 0.25)))  # calculates the quantiles
-print(summary(var))   # provides a summary of statistics
+print(mean(var)) # calculates the mean
+print(median(var)) # calculates the median
+print(sd(var)) # calculates the standard deviation
+print(var(var)) # calculates the variance
+print(min(var)) # finds the minimum value
+print(max(var)) # finds the maximum value
+print(quantile(var, probs = seq(0, 1, 0.25))) # calculates the quantiles
+print(summary(var)) # provides a summary of statistics
 ```
+
+
+# Generate number sequences
+You can use `seq()` function to generate a sequence of numbers with specified start, end, and step size. The `rep()` function can be used to repeat elements of a vector a specified number of times.
+
+```{r sequence_generation, results='hide'}
+# generate a sequence from 1 to 10 with step size of 2
+seq1 <- seq(from = 1, to = 10, by = 2)
+cat("Sequence from 1 to 10 with step size of 2:", seq1, "\n")
+
+# generate a sequence from 5 to 25 with 6 equally spaced numbers
+seq2 <- seq(5, 25, length.out = 7)
+cat("Sequence from 5 to 25 with 7 equally spaced numbers:", seq2, "\n")
+
+# repeat the vector c(1, 2, 3) three times
+rep1 <- rep(c(1, 2, 3), times = 3)
+cat("Repeat the vector c(1, 2, 3) three times:", rep1, "\n")
+
+# repeat each element of the vector c(4, 5) two times
+rep2 <- rep(c(4, 5), each = 2)
+cat("Repeat each element of the vector c(4, 5) two times:", rep2, "\n")
+```
+
+# Complex vector 
+R also supports complex numbers, which have a real part and an imaginary part. You can create complex numbers using the `complex()` function or by using the `i` suffix for the imaginary part.
+
+```{r complex_vector_example, results='hide'}
+# create a complex number using complex() function
+z1 <- complex(real = c(1, -1, 2), imaginary = c(3, 4, -2))
+print(z1)
+# also can use mod and arg to create complex number
+z2 <- complex(mod = 1, arg = (0:3) / 2 * pi)
+print(z2)
+
+# Get the real, imaginary parts and the mods
+real_parts <- Re(z1)
+imaginary_parts <- Im(z1)
+mods <- Mod(z1)
+mods2 <- abs(z1) # equivalent to Mod()
+arg1 <- Arg(z1)
+conj1 <- Conj(z1) # complex conjugate
+print(real_parts)
+print(imaginary_parts)
+print(mods)
+print(mods2)
+print(arg1)
+print(conj1)
+
+a <- sqrt(-1) # this will return NaN
+b <- sqrt(-1 + 0i)
+print(a)
+print(b)
+```
+
+# Bool type vector
+R has a logical data type that can take on two values: `TRUE` and `FALSE`. Logical values are often used in conditional statements and logical operations.
+
+```{r logical_vector_example, results='hide'}
+# create a logical vector
+bool_vec <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+
+a <- c(1, 2, 3, 4, 5)
+b <- c(5, 4, 3, 2, 1)
+
+compare_vec <- a > b
+print(bool_vec)
+print(compare_vec)
+```
+
+calculation and comparison between unknown values will return `NA` (not available)
+
+`NA` is different from `NaN`, which stands for "Not a Number" and is used to represent undefined or unrepresentable numerical results, such as `0/0` or `sqrt(-1)`.
+
+```{r na_nan_example, results='hide'}
+x <- c(1, 2, NA, 4)
+y <- c(2, NA, 3, 4)
+sum_x <- sum(x) # returns NA
+sum_y <- sum(y, na.rm = TRUE) # ignores NA and returns 9
+comparison <- x > y # returns NA for comparisons involving NA
+print(sum_x)
+print(sum_y)
+print(NA == NA)
+print(is.na(NA)) # check if value is NA
+print(is.nan(NaN))
+print(is.finite(Inf))
+print(comparison)
+```
+
+The following are some common logical operations and functions in R:
+
+`>`, `<`, `>=`, `<=`, `==`, `!=`, `%in%` : Comparison operators that return logical values. In which `%in%` checks if elements of one vector are present in another vector.
+
+`any()`: Returns `TRUE` if any element of a logical vector is `TRUE`.
+`all()`: Returns `TRUE` if all elements of a logical vector are `TRUE`.
+`match()`: Returns a vector of the positions of (first) matches of its first argument in its second.
+
+```{r logical_operations_example, results='hide'}
+a <- c(1, 2, 3, 4, 5)
+b <- c(5, 4, 3, 2, 1)
+in_or_not <- a %in% c(2, 4, 6)
+any_greater <- any(a > b)
+all_greater <- all(a >= 1)
+match_result <- match(c(3, 6), a) # returns positions of matches
+print(match_result)
+print(in_or_not)
+print(any_greater)
+print(all_greater)
+```
+
+
+## Boolean operators
+R provides several boolean operators for logical operations:
+| Operator | Description               | Example                | Result          |
+|----------|---------------------------|------------------------|-----------------|
+| `&`      | Element-wise AND          | `c(TRUE, FALSE) & c(TRUE, TRUE)` | `c(TRUE, FALSE)` |
+| `|`      | Element-wise OR           | `c(TRUE, FALSE) | c(FALSE, TRUE)` | `c(TRUE, TRUE)`  |
+| `!`      | NOT                       | `!c(TRUE, FALSE)`          | `c(FALSE, TRUE)` |
+| `xor()`  | Element-wise exclusive OR | `xor(c(TRUE, FALSE), c(FALSE, TRUE))` | `c(TRUE, TRUE)`  |
+| `&&`     | Logical AND (first element only) | `TRUE && FALSE`          | `FALSE`         |
+| `||`   | Logical OR (first element only, which means if the first element is TRUE, the second element is not evaluated)  | `TRUE || FALSE`          | `TRUE`          |  
+| `which()` | Returns the indices of TRUE values in a logical vector | `which(c(TRUE, FALSE, TRUE))` | `c(1, 3)`       |
+| `identical()` | Tests if two R objects are exactly the same, include datatype, float do not equal to int type | `identical(c(1, 2), c(1, 2))` | `TRUE`          |
+| `all.equal()` | Compares two R objects for near equality, useful for comparing floating-point numbers | `all.equal(0.1 + 0.2, 0.3)` | `TRUE`          |
+
+# String
+
+## String vector
+
+```{r string_vector_example, results='hide'}
+s1 <- c("abc", "", "a cat", NA, "李明")
+```
+
+Here, the empty string `''` is a valid string with zero length, while `NA` represents a missing value.
+
+## Paste strings
+You can use the `paste()` or `paste0()` functions to concatenate strings in R.
+
+```{r paste_example, results='hide'}
+str1 <- "Hello"
+str2 <- "World"
+# Using paste() with a space separator
+greeting1 <- paste(str1, str2)
+# Using paste0() without any separator
+greeting2 <- paste0(str1, str2)
+print(greeting1) # prints "Hello World"
+print(greeting2) # prints "HelloWorld"
+```
+
+## length of string
+You can use the `nchar()` function to get the number of characters in a string.
+```{r nchar_example, results='hide'}
+str <- "Hello, R!"
+length <- nchar(str)
+print(length) # prints 9
+```
+
+## Substring
+You can use the `substr()` function to extract a substring from a string by specifying the start
+and end positions.
+```{r substr_example, results='hide'}
+str <- "Hello, R!"
+sub_str <- substr(str, start = 1, stop = 2)
+sub_strs <- substr(c("Jan_01", "Feb_01", "Mar_01"), start = 1, stop = 3)
+print(sub_str) # prints "He"
+print(sub_strs) # prints c("Jan", "Feb", "Mar")
+```
+
+## Change bewteen string and number
+You can use the `as.numeric()` function to convert a string to a numeric value.
+Also, you can use the `as.character()` function to convert a numeric value to a string.
+```{r string_to_number_example, results='hide'}
+str_num <- "3.14"
+str_num2 <- 15926
+
+num <- as.numeric(str_num)
+
+num2 <- as.numeric(paste0(str_num, as.character(str_num2)))
+print(num) # prints 3.14
+print(num2) # prints 315926
+```
+
+
+Can batchly parse a vector of strings to numbers:
+```{r batch_string_to_number_example, results='hide'}
+readr::parse_number(c(
+    "123", "output-123.txt", "a123.456bc04",
+    "30.2%", "abc"
+))
+```
+
+## substitute string
+You can use the `sub()` function to replace the first occurrence of a pattern in a string
+or use the `gsub()` function to replace all occurrences of a pattern in a string.
+```{r string_substitute_example, results='hide'}
+str <- "The cat sat on the mat."
+# Replace the first occurrence of "cat" with "dog"
+new_str1 <- sub("cat", "dog", str)
+# Replace all occurrences of "the" with "a"
+new_str2 <- gsub("the", "a", str, ignore.case = TRUE)
+print(new_str1) # prints "The dog sat on the mat."
+print(new_str2) # prints "a cat sat on a mat."
+
+
+# also you can use regular expression for more complex pattern matching
+gsub("[[:space:]]+", " ", "a   cat  in a box", perl = TRUE)
+``` 
+
+# Index and subset (And the Key Value Pair data structure)
+You can use square brackets `[]` to index and subset vectors in R.
+
+the index starts from 1 in R.
+
+you can use postiive integers, negative integers, logical vector, or character vector (for named vector) as indices.
+
+```{r index_subset_example, results='hide'}
+vec <- c("a", "b", "c", "d", "e")
+# Positive integer indexing
+first_element <- vec[1]
+subset_vec <- vec[c(2, 4)]
+# Negative integer indexing
+without_third <- vec[-3]
+# Logical vector indexing
+logical_index <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+subset_logical <- vec[logical_index]
+print(first_element) # prints "a"
+print(subset_vec) # prints c("b", "d")
+print(without_third) # prints c("a", "b", "d", "
+print(subset_logical) # prints c("a", "c", "e")
+```
+
+for the named vector:
+```{r named_vector_example, results='hide'}
+named_vec <- c(apple = 1, banana = 2, cherry = 3)
+# Character vector indexing
+apple_value <- named_vec["apple"]
+subset_named <- named_vec[c("banana", "cherry")]
+print(apple_value) # prints 1
+print(subset_named) # prints c(banana = 2, cherry = 3)
+```
+
+you can also use the which to find some special index:
+```{r which_example, results='hide'}
+vec <- c(10, 20, 30, 40, 50)
+# Find indices of elements greater than 25
+indices <- which(vec > 25)
+subset_vec <- vec[indices]
+print(indices) # prints c(3, 4, 5)
+print(subset_vec) # prints c(30, 40, 50)
+``` 
+
+
+Can also mapping more than one times:
+```{r multiple_mapping_example, results='hide'}
+gender.index <- setNames(c(1, 0), c("Male", "Female"))
+gender.names <- c("Male", "Female", "Female", "Male", "Male")
+gender.codes <- gender.index[gender.names]
+print(gender.codes) # prints c(1, 0, 0, 1, 1)
+```
+
+unique value
+```{r unique_example, results='hide'}
+vec <- c(1, 2, 2, 3, 4, 4, 4, 5)
+unique_values <- unique(vec)
+print(unique_values) # prints c(1, 2, 3, 4, 5)
+``` 
+
+set level operation
+
+```{r set_operations_example, results='hide'}
+vec1 <- c(1, 2, 3, 4, 5)
+vec2 <- c(4, 5, 6, 7, 8)
+union_vec <- union(vec1, vec2)
+intersect_vec <- intersect(vec1, vec2)
+setdiff_vec <- setdiff(vec1, vec2)
+print(union_vec) # prints c(1, 2, 3, 4, 5, 6, 7, 8)
+print(intersect_vec) # prints   c(4, 5)
+print(setdiff_vec) # prints c(1, 2, 3)
+# rember %in% is element-wise operation, not set level operation
+vec1_in_vec2 <- vec1 %in% vec2
+print(vec1_in_vec2) # prints c(FALSE, FALSE, FALSE, TRUE, TRUE
+```
+
+# Check the attribute of a variable
+Use `typeof()` to check the datatype of a variable.
+
+```{r typeof_example, results='hide'}
+typeof(123) # "double"
+typeof(123L) # "integer"
+typeof(TRUE) # "logical"
+typeof("Hello") # "character"
+typeof(1 + 2i) # "complex"
+typeof(c(1, 2, 3)) # "double"
+typeof(list(a = 1, b = "text")) # "list"
+typeof(factor(c("A", "B", "A"))) # "integer"
+```
+check if a variable is of a specific type using `is.<type>()` functions.
+```{r is_type_example, results='hide'}
+is.numeric(3.14) # TRUE
+is.integer(3L) # TRUE
+is.logical(FALSE) # TRUE
+is.character("R") # TRUE
+is.complex(1 + 2i) # TRUE
+is.vector(c(1, 2, 3)) # TRUE
+is.list(list(a = 1, b = 2)) # TRUE
+is.factor(factor(c("X", "Y", "X"))) # TRUE
+```
+
+the type of some special variable types: like `NA`, `NaN`, `Inf`, `-Inf`
+```{r special_types_example, results='hide'}
+is.na(NA) # TRUE
+is.nan(NaN) # TRUE
+is.finite(Inf) # FALSE
+is.finite(-Inf) # FALSE
+is.finite(100) # TRUE
+
+typeof(NA) # "logical"
+typeof(NaN) # "double"
+typeof(Inf) # "double"
+typeof(-Inf) # "double"
+
+length(c(NA, NaN, Inf, -Inf)) # 4
+
+is.null(c())
+```
+
+## Attributes
+You can use the `attributes()` function to check the attributes of a variable, all R objects can have attributes `length` and `mode`.
+Some other useful attributes include `names`, `dim`, `class`, etc.
+
+```{r attributes_example, results='hide'}
+vec <- c(a = 1, b = 2, c = 3)
+attrs <- attributes(vec)
+print(attrs)
+
+x <- table(c("A", "B", "A", "C", "B", "A"))
+print(x)
+attrs_x <- attributes(x)
+print(attrs_x)
+
+x <- matrix(1:12, nrow = 3, ncol = 4)
+attr(x, "dim") # equal to dim(x)
+## [1] 3 4
+``` 
+
+More special
+```{r more_attributes_example, results='hide'}
+x <- 1:5
+y <- x^2
+lmr <- lm(y ~ x)
+print(names(lmr))
+print(class(lmr))
+print(lmr)
+```
+
+# Date
+Basie method includ `as.Date()` or `as.POSIXct()` to convert string to date type. You can also use package `lubridate` for more convenient date parsing and manipulation.
+
+
+```{r date_example, results='hide'}
+if (!requireNamespace("lubridate", quietly = TRUE)) {
+    install.packages("lubridate")
+}
+library(lubridate)
+date1 <- as.Date("2023-10-01")
+date2 <- as.POSIXct("2023-10-01 12:34:56")
+date3 <- ymd("20231001")
+date4 <- ymd_hms("2023-10-01 12:34:56")
+print(date1)
+print(date2)
+print(date3)
+print(date4)
+```
+
+# Factor
+
+Factors are used to represent categorical data in R. You can create a factor using the `factor()` function.
+
+## discrete categories
+```{r factor_example, results='hide'}
+colors <- c("red", "blue", "green", "blue", "red", "green", "green")
+color_factor <- factor(colors)
+print(color_factor)
+print(levels(color_factor)) # prints the levels of the factor
+```
+
+Change the levels of a factor to numeric
+```{r factor_levels_example, results='hide'}
+size_levels <- c("small", "medium", "large", "extra large")
+size_factor <- factor(c("medium", "large", "small", "large", "medium"),
+    levels = size_levels
+)
+size_numeric <- as.numeric(size_factor)
+print(size_factor) # prints the factor with levels
+print(size_numeric) # prints c(2, 3, 1, 3, 2)
+```
+
+## Continuous categories
+use the `cut()` function to convert continuous data into categorical data by specifying break points.
+```{r cut_example, results='hide'}
+ages <- c(23, 45, 31, 50, 29, 37, 41, 55)
+age_groups <- cut(ages,
+    breaks = c(20, 30, 40, 50, 60),
+    labels = c("20s", "30s", "40s", "50s"),
+    right = FALSE
+)
+print(age_groups)
+```
+
+## table
+table function is used to count the frequency of each level in a factor.
+```{r table_example, results='hide'}
+fruit <- factor(c("apple", "banana", "apple", "orange", "banana", "apple"))
+fruit_table <- table(fruit)
+print(fruit_table["apple"]) # prints 3
+``` 
+
+tapply function can be used to apply a function to each level of a factor.
+```{r tapply_example, results='hide'}
+scores <- c(60, 90, 78, 92, 88, 76, 50, 40, 91, 87)
+groups <- factor(c("A", "B", "A", "B", "A", "A", "A", "A", "B", "A"))
+# for each group, calculate the average score
+avg_scores <- tapply(scores, groups, mean)
+print(avg_scores) # prints the average scores for each group
+barplot(avg_scores,
+    main = "Average Scores by Group",
+    xlab = "Group",
+    ylab = "Average Score"
+)
+```
+
+# List type
+Lists are used to store collections of objects in R. You can create a list using the `list()` function.
+```{r list_example, results='hide'}
+rec <- list(
+    name = "John",
+    age = 30,
+    scores = c(85, 90, 78)
+)
+rec[3] # get the third element as a list
+rec[[3]] # get the third element directly
+typeof(rec[3])
+typeof(rec[[3]])
+
+# change the element
+rec$age <- 31
+rec$scores[3] <- 80
+
+
+# add new element
+rec$gender <- "Male"
+print(rec)
+
+# delete element
+rec$scores <- NULL
+print(rec)
+```
+
+## concate two Lists
+```{r list_concatenate_example, results='hide'}
+list1 <- list(a = 1, b = 2)
+list2 <- list(c = 3, d = 4)
+combined_list <- c(list1, list2)
+print(combined_list) # prints list(a = 1, b = 2, c
+# = 3, d = 4)
+```
+
+# Matrix and array
+
+
+Define a matrix using the `matrix()` function:
+**Similar to math calculation, we commonly consider vector as column vector**
+```{r matrix_example, results='hide'}
+A <- matrix(11:16, nrow = 3, ncol = 2)
+B <- matrix(11:16, nrow = 3, ncol = 2, byrow = TRUE)
+# by row means fill the matrix row by row, default is by column
+print(A)
+print(B)
+```
+
+Access the number of rows and columns using `nrow()` and `ncol()` functions:
+```{r matrix_dimensions_example, results='hide'}
+num_rows <- nrow(A)
+num_cols <- ncol(A)
+print(num_rows) # prints 3
+print(num_cols) # prints 2
+```
+
+
+Transpose a matrix using the `t()` function:
+```{r matrix_transpose_example, results='hide'}
+A_transpose <- t(A)
+print(A_transpose)
+```
+
+The subset of the matrix
+```{r matrix_subset_example, results='hide'}
+element_1_2 <- A[1, 2] # get element at row
+subset_row_2 <- A[2, ] # get entire row 2
+subset_col_1 <- A[, 1] # get entire column
+submatrix <- A[1:2, 1:2] # get submatrix of first 2 rows and first 2 columns
+print(element_1_2) # prints 14
+print(subset_row_2) # prints c(12, 15)
+print(subset_col_1) # prints c(11, 12, 13)
+print(submatrix) # prints submatrix of first 2 rows and first 2 columns
+```
+
+Can use `colnames()` and `rownames()` to set or get the names of columns and rows:
+```{r matrix_rownames_colnames_example, results='hide'}
+rownames(A) <- c("Row1", "Row2", "Row3")
+colnames(A) <- c("Col1", "Col2")
+print(A)
+```
+
+The underlying data structure is still vector, so you can use collect elements from matrix:
+```{r matrix_as_vector_example, results='hide'}
+A_vector <- as.vector(A)
+print(A_vector) # prints c(11, 12, 13, 14, 15, 16)
+print(A[c(1, 4, 5)])
+```
+
+
+
+We can use cbind and rbind to combine vectors into matrix by column or by row:
+```{r cbind_rbind_example, results='hide'}
+vec1 <- c(1, 2, 3)
+vec2 <- c(4, 5, 6)
+matrix_by_col <- cbind(vec1, vec2)
+matrix_by_row <- rbind(vec1, vec2)
+print(matrix_by_col)
+print(matrix_by_row)
+```
+
+## Matrix calculation
+You can perform various matrix operations in R, such as addition, subtraction, multiplication, and inversion
+```{r matrix_calculation_example, results='hide'}
+print(A)
+
+C1 <- A + 2
+C2 <- A / 2
+
+C1 - C2 # element-wise subtraction
+C1 * C2 # element-wise multiplication
+C1 %*% t(C2) # matrix multiplication
+```
+
+when we multiply vector with matrix, if the vector is on the left side, it is considered as a row vector; if the vector is on the right side, it is considered as a column vector.
+```{r vector_matrix_multiplication_example, results='hide'}
+vec <- c(1, 2, 3)
+result1 <- vec %*% A # vec is treated as a row vector
+result2 <- A %*% vec[c(1, 2)] # vec is treated as a column vector
+print(result1)
+print(result2)
+```
+
+inner product and outer product
+```{r inner_outer_product_example, results='hide'}
+vec1 <- c(1, 2, 3)
+vec2 <- c(4, 5, 6)
+inner_product <- sum(vec1 * vec2) # inner product
+outer_product <- vec1 %*% t(vec2) # outer product
+outer_product2 <- vec1 %o% vec2 # outer product using %o%
+print(inner_product) # prints 32
+print(outer_product)
+print(outer_product2)
+```
+
+Inverse of a matrix can be calculated using the `solve()` function: which is trying to solve the equation $Ax = I$, where $A$ is the matrix, $x$ is the inverse matrix, and $I$ is the identity matrix.
+
+```{r matrix_inverse_example, results='hide'}
+D <- matrix(c(4, 7, 2, 6), nrow = 2)
+D_inv <- solve(D)
+print(D_inv)
+
+# solve linear equations Ax = b
+b <- c(1, 2)
+x <- solve(D, b)
+print(x)
+print(D %*% x) # should be equal to b
+```
+
+Apply function can be used to apply a function to rows or columns of a matrix:
+```{r apply_example, results='hide'}
+E <- matrix(1:12, nrow = 3)
+row_sums <- apply(E, 1, sum) # sum of each row
+col_means <- apply(E, 2, mean) # mean of each column
+print(E)
+print(row_sums) # prints c(22, 26, 30)
+print(col_means) # prints c(4, 5, 6, 7)
+```
+
+## Arrary
+Arrays are multi-dimensional data structures in R. You can create an array using the `array()` function.
+```{r array_example, results='hide'}
+array_3d <- array(1:24, dim = c(3, 4, 2)) # 3 rows, 4 columns, 2 layers
+print(array_3d)
+```
+
+index an array 
+```{r array_index_example, results='hide'}
+element_2_3_1 <- array_3d[2, 3, 1] # get element at row 2, column 3, layer 1
+subset_layer_2 <- array_3d[, , 2] # get entire layer 2
+print(element_2_3_1) # prints 14
+print(subset_layer_2) # prints the 2nd layer of the array
+```
+
+# Data Frame
+the most commonly used data structure in R is the data frame, which is used to store tabular data. You can create a data frame using the `data.frame()` function.
+
+```{r data_frame_example, results='hide'}
+d <- data.frame(
+    name = c("李明", "张聪", "王建"),
+    age = c(30, 35, 28),
+    height = c(180, 162, 175),
+    stringsAsFactors = FALSE # avoid converting strings to factors
+)
+print(d)
+print(names(d))
+print(colnames(d))
+```
+
+Visualize the table, using `knitr:kable()` function:
+```{r data_frame_kable_example, results='asis'}
+knitr::kable(d, caption = "Sample Data Frame")
+```
+
+## Access data frame elements
+You can access elements of a data frame using the `$` operator, square brackets `[]`,
+or the `subset()` function.
+```{r data_frame_access_example, results='hide'}
+# Using $ operator
+ages <- d$age
+# Using square brackets
+first_row <- d[1, ]
+height_column <- d[, "height"] # this is not compatible with tibble
+height_column2 <- d[["height"]] # this is compatible with tibble
+sub_df <- d[1:2, c("name", "age")]
+# Using subset() function
+subset_df <- subset(d, age > 30)
+print(ages) # prints c(30, 35, 28)
+print(first_row) # prints the first row of the data frame
+print(height_column) # prints c(180, 162, 175)
+print(sub_df) # prints the subset of the data frame with first 2 rows and name, age columns
+print(subset_df) # prints the subset of the data frame with age > 30
+```
+
+## Tibble
+tibble is a modern version of data frame provided by the `tibble` package, when using readr or dplyr package, the data is usually read into a tibble.
+
+```{r tibble_example, results='hide'}
+library(tibble)
+library(readr)
+d.class <- read_csv("./data/class.csv")
+print(d.class)
+print(class(d.class))
+```
+
+# Input and Output
+
+## variable and object storage
+can use `save()` and `load()` functions to save and load R objects in binary format. Also can use `saveRDS()` and `readRDS()` functions to save and load a single R object in binary format. Besides, `arrow` package to store data in Apache Parquet format.
+
+## Excel
+use `readxl` package to read Excel files and `writexl` package to write Excel files.
+
+## More efficient data 
+use `data.table` package to read and write large datasets efficiently.
+
+```{r data_table_example, results='hide'}
+if (!requireNamespace("data.table", quietly = TRUE)) {
+    install.packages("data.table")
+}
+library(data.table)
+# Read a large CSV file into a data.table
+dt <- fread("./data/class.csv", header = TRUE)
+print(dt)
+```
+
+# Control structures
+## Selection
+`if (condition) {expression} else {expression}` is a commonly used selection structure in R.
+```{r if_example, results='hide'}
+lambda <- NA
+if (is.na(lambda)) {
+    lambda <- 0.5
+}
+
+x <- 10
+if (x > 1) {
+    y <- 2.5
+} else {
+    y <- -y
+}
+
+
+x <- c(0.05, 0.6, 0.3, 0.9)
+for (i in seq(along = x)) {
+    if (x[i] <= 0.2) {
+        cat("Small\n")
+    } else if (x[i] <= 0.8) {
+        cat("Medium\n")
+    } else {
+        cat("Large\n")
+    }
+}
+
+# shorter can use ifelse(test, yes, no)
+print(ifelse((1:6) >= 3, 1:2, c(-1, -2)))
+```
+
+## Loop and iteration
+### For loop
+`for (variable in sequence) {expression}` is a commonly used loop structure in R.
+
+
+```{r for_loop_example, results='hide'}
+set.seed(101)
+x <- rnorm(5)
+y <- numeric(length(x))
+for (i in 1:5) {
+    if (x[i] >= 0) y[i] <- 1 else y[i] <- 0
+}
+print(y)
+```
+
+
+for is usually much slower than vectorized operation, so try to avoid using for loop when possible.
+for example, the above code can be rewritten as:
+```{r vectorized_example, results='hide'}
+set.seed(101)
+x <- rnorm(5)
+y <- ifelse(x >= 0, 1, 0)
+print(y)
+```
+
+can also use `lapply()`, `sapply()`, `vapply()`, `mapply()` functions for iteration over lists or vectors.
+```{r lapply_example, results='hide'}
+set.seed(101)
+x <- list(a = 1:5, b = rnorm(5), c = runif(5))
+result <- lapply(x, mean)
+print(result)
+```
+
+### While loop
+`while (condition) {expression}` is another loop structure in R.
+```{r while_loop_example, results='hide'}
+count <- 1
+while (count <= 5) {
+    cat("Count is:", count, "\n")
+    count <- count + 1
+}
+```
+
+one can also use `break` and `next` statements to control the flow of loops.
+```{r break_next_example, results='hide'}
+for (i in 1:10) {
+    if (i == 6) {
+        break # exit the loop when i is 6
+    }
+    if (i %% 2 == 0) {
+        next # skip even numbers
+    }
+    cat("i is:", i, "\n")
+}
+```
+
+We can compute the value of exp by using Taylor series expansion with a loop: $$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}$$
+```{r exp_taylor_series_example, results='hide'}
+e0 <- exp(1.0)
+s <- 1.0
+x <- 1
+k <- 0
+repeat{ # equal to while(TRUE)
+    k <- k + 1
+    x <- x / k
+    s <- s + x
+    if (x < .Machine$double.eps) break
+}
+err <- s - e0
+cat("k=", k, " s=", s, " e=", e0, " 误差=", err, "\n")
+```
+
+Here `.Machine$double.eps` gives the smallest positive floating-point number `x` such that `1 + x != 1`, which is used as a threshold to stop the loop when the additional term becomes negligible.
+
+# Function
+
+
+A typical way to define a function in R is using the `function` keyword: `function_name <- function(arg1, arg2, ...) {expression}`
+
+```{r function_example, results='hide'}
+# define a function to calculate the square of a number
+f <- function(x) {
+    #   x <- seq(0, 2*pi, length=50)
+    y1 <- sin(x)
+    y2 <- cos(x)
+    plot(x, y1,
+        type = "l", lwd = 2, col = "red",
+        xlab = "x", ylab = ""
+    )
+    lines(x, y2, lwd = 2, col = "blue")
+    abline(h = 0, col = "gray")
+}
+
+f(seq(0, 2 * pi, length = 50))
+```
+
+
+The last expression in the function is returned as the result of the function. You can also use the `return()` function to explicitly return a value from the function.
+
+```{r function_return_example, results='hide'}
+skewness <- function(x) {
+    n <- length(x)
+    xbar <- mean(x)
+    S <- sd(x)
+    n / (n - 1) / (n - 2) * sum((x - xbar)^3) / S^3
+}
+
+skewness2 <- function(x) {
+    n <- length(x)
+    xbar <- mean(x)
+    S <- sd(x)
+    result <- n / (n - 1) / (n - 2) * sum((x - xbar)^3) / S^3
+    return(result)
+}
+
+vec <- rnorm(100)
+print(skewness(vec))
+print(skewness2(vec))
+```
+
+
+People can also set default values for function arguments:
+```{r function_default_args_example, results='hide'}
+power <- function(x, p = 2) {
+    return(x^p)
+}
+
+print(power(3)) # prints 9
+print(power(3, 3)) # prints 27
+```
+
+Anonymous functions can be created using the `function` keyword without assigning it to a name. These functions are often used as arguments to other functions, such as `apply()`, `lapply()`, and `sapply()`.
+```{r anonymous_function_example, results='hide'}
+squared_values <- sapply(1:5, function(x) x^2)
+print(squared_values) # prints c(1, 4, 9, 16, 25)
+vapply(
+    iris[, 1:4], function(x, pow = 2) {
+        (max(x) - min(x))^pow
+    },
+    numeric(1), # the return type is numeric of length 1
+    pow = 3 # additional argument to the anonymous function
+)
+```
+
+
+## debug
+R provides several functions for debugging, such as `debug()`, `browser()`, `traceback()`, and `recover()`.
+
+During the debug mode, you can use the following commands:
+- `n`: next line
+- `c`: continue execution, no longer step through
+- `f`: finish the function and return to the caller
+- `Q`: quit debugging
+- `s`: step into the function call
+```{r debug_example, results='hide'}
+# use browser() to set a breakpoint in the function
+test_debug <- function(x) {
+    y <- x^2
+    browser() # set a breakpoint here
+    z <- y + 10
+    return(z)
+}
+result <- test_debug(3)
+print(result)
+```
+
+use `stopifnot()` to check for conditions and throw an error if the condition is not met.
+```{r stopifnot_example, results='hide'}
+safe_sqrt <- function(x) {
+    stopifnot(is.numeric(x), all(x >= 0))
+    return(sqrt(x))
+}
+print(safe_sqrt(9)) # prints 3
+tryCatch(
+	{
+		print(safe_sqrt(-4))
+	},
+	error = function(e) {
+		cat("Error:", e$message, "\n")
+	}
+)
+```
+
+can use `try()` and `tryCatch()` to handle errors gracefully.
+```{r try_trycatch_example, results='hide'}
+result <- try(log(-1), silent = TRUE)
+if (inherits(result, "try-error")) {
+    cat("An error occurred:", result, "\n")
+} else {
+    cat("Result:", result, "\n")
+}
+safe_log <- function(x) {
+    tryCatch(
+        {
+            result <- log(x)
+            return(result)
+        },
+        warning = function(w) {
+            cat("Warning:", w$message, "\n")
+            return(NA)
+        },
+        error = function(e) {
+            cat("Error:", e$message, "\n")
+            return(NA)
+        }
+    )
+}
+print(safe_log(10)) # prints 2.302585
+print(safe_log(-5)) # prints NA and an error message
+```
+
+
+# Clean the data
+
+## Tidyverse system 
+tidyverse is a series of R packages designed for data science, including `dplyr`, `tidyr`, `ggplot2`, `readr`, `puur`, and others. These packages provide a consistent and user-friendly interface for data manipulation, visualization, and analysis.
+
+Here, `readr` is used to read data, `dplyr` is used for data manipulation, and `tidyr` is used for data tidying and reshaping, `puur` is used for functional programming like mapping-reduce, and `ggplot2` is used for data visualization.
+
+install and load the tidyverse packages:
+```{r tidyverse_install_load_example, results='hide'}
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+    install.packages("tidyverse")
+}
+library(tidyverse)
+```
+
+## Read data as tibble
+You can use the `read_csv()` function from the `readr` package to read CSV files into a tibble.
+```{r read_csv_example, results='hide'}
+data <- read_csv(
+    "./data/class.csv",
+    col_types = cols(
+        .default = col_double(),
+        name = col_character(),
+        sex = col_factor(levels = c("M", "F"))
+    )
+)
+print(data)
+print(class(data))
+print(data[["sex"]])
+```
+
+
+## use filter to see subset of data which meet certain conditions
+```{r dplyr_filter_example, results='hide'}
+# filter rows where age is greater than 30
+data_filtered <- filter(data, age > 14)
+print(data_filtered)
+
+data_filtered <- data |> 
+	filter(age > 14 & sex=="F") |>
+	knitr::kable(caption = "Filtered Data Frame: age > 14 and sex == 'F'")
+```
+
+
+## see head and tail and slice of data 
+```{r dplyr_head_tail_example, results='hide'}
+data_head <- head(data, 5)
+data_tail <- tail(data, 5)
+print(data_head)
+print(data_tail)
+
+# use dplyr slice to get rows by index
+data_slice <- slice(data, 2:5)
+print(data_slice)
+
+# directly indexing data
+data_indexed <- data[2:5, c("name", "age")]
+print(data_indexed)
+```
+
+
+## sample rows from data
+```{r dplyr_sample_example, results='hide'}
+# sample 5 rows from data
+data_sampled <- sample_n(data, 5)
+print(data_sampled)
+# sample 20% of rows from data
+data_sampled_frac <- sample_frac(data, 0.2)
+print(data_sampled_frac)
+```
+
+## remove duplicate rows
+```{r dplyr_distinct_example, results='hide'}
+# remove duplicate rows based on all columns
+data_distinct <- distinct(data)
+print(data_distinct)
+# remove duplicate rows based on specific columns
+data_distinct_name <- distinct(data, name, .keep_all = TRUE)
+print(data_distinct_name)
+```
+
+## drop rows with missing values
+```{r dplyr_drop_na_example, results='hide'}
+# drop rows with any missing values
+data_dropped_na <- drop_na(data)
+print(data_dropped_na)
+# drop rows with missing values in specific columns
+data_dropped_na_age <- drop_na(data, age)
+print(data_dropped_na_age)
+```
+
+
+## Arange rows by column values
+```{r dplyr_arrange_example, results='hide'}
+# arrange rows by age in ascending order
+data_arranged <- arrange(data, age)
+print(data_arranged)
+# arrange rows by age in descending order
+data_arranged_desc <- arrange(data, desc(age))
+print(data_arranged_desc)
+```
+
+## rename the columns name
+```{r dplyr_rename_example, results='hide'}
+# rename column 'height' to 'ht'
+data_renamed <- dplyr::rename(data, ht = height)
+knitr::kable(data_renamed, caption = "Renamed Data Frame: 'height' to 'ht'")
+```
+
+## use mutate to add new columns or modify existing columns
+```{r dplyr_mutate_example, results='hide'}
+# add a new column 'bmi' calculated from weight and height
+data_mutated <- mutate(data, bmi = weight / (height / 100)^2)
+knitr::kable(data_mutated, caption = "Mutated Data Frame: Added 'bmi' Column")
+
+data_mutated |> 
+	mutate(sex_num = as.numeric(sex)) |>
+	knitr::kable(caption = "Mutated Data Frame: Added 'sex_num' Column using pipe")
+```
+
+
+
+
+# Plot

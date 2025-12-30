@@ -124,7 +124,7 @@ print(head(tax_data_chinese))
 Next, we can use `table()` function to summarize the frequency of values in a specific column, and `summary()` function to get a summary of statistics for each column in the data frame.
 
 
-````{r summarize_data}
+```{r summarize_data}
 # calclulate the frequency of values in the "Levy Method" column
 # show frequency of different levy methods in the first 10 rows
 table(tax_data[1:10, c("Levy Method")])
@@ -135,8 +135,6 @@ table(tax_data[, c("Levy Method", "Filing Channel")])
 
 # make it more readable
 knitr::kable(table(tax_data[, c("Levy Method", "Filing Channel")]))
-
-
 # summarize data with numerical data type
 summary(tax_data)
 ```
